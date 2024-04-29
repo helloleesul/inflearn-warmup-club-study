@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Steak",
+    "price": 25000,
+    "imageURL": "https://natashaskitchen.com/wp-content/uploads/2020/03/Pan-Seared-Steak-4.jpg",
+    "description": "Juicy steak cooked to your preference, served with mashed potatoes and gravy.",
+    "type": "Dinner"
+  },
+  {
+    "name": "Strawberry Banana Smoothie",
+    "price": 6000,
+    "imageURL": "https://www.simplyrecipes.com/thmb/QoHhyqqcogAsAVvkGL4AZrOtNpk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Strawberry-Banana-Smoothie-LEAD-9-4526522ce59d4d65a4ee2968b4081263.jpg",
+    "description": "Refreshing smoothie made with fresh strawberries, bananas, and yogurt.",
+    "type": "Shakes"
+  },
+  {
+    "name": "Pancakes",
+    "price": 8000,
+    "imageURL": "https://www.allrecipes.com/thmb/WqWggh6NwG-r8PoeA3OfW908FUY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/21014-Good-old-Fashioned-Pancakes-mfs_001-1fa26bcdedc345f182537d95b6cf92d8.jpg",
+    "description": "Delicious fluffy pancakes served with maple syrup.",
+    "type": "Breakfast"
+  },
+  {
+    "name": "Caesar Salad",
+    "price": 12000,
+    "imageURL": "https://natashaskitchen.com/wp-content/uploads/2019/01/Caesar-Salad-Recipe-3.jpg",
+    "description": "Classic Caesar salad with romaine lettuce, croutons, parmesan cheese, and Caesar dressing.",
+    "type": "Lunch"
+  },
+  {
+    "name": "Chocolate Milkshake",
+    "price": 7000,
+    "imageURL": "https://houseofnasheats.com/wp-content/uploads/2023/10/FB-Chocolate-Milkshake-1.jpg",
+    "description": "Indulgent milkshake made with rich chocolate ice cream and milk.",
+    "type": "Shakes"
+  },
+  {
+    "name": "Grilled Salmon",
+    "price": 18000,
+    "imageURL": "https://www.thespruceeats.com/thmb/HgM2h42z1HGEcSWkWk5CgAjDDpQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/how-to-grill-salmon-2216658-hero-01-a9c948f8a238400ebaafc0caf509c7fa.jpg",
+    "description": "Fresh salmon fillet grilled to perfection, served with roasted vegetables.",
+    "type": "Dinner"
+  },
+  {
+    "name": "Eggs Benedict",
+    "price": 10000,
+    "imageURL": "https://www.allrecipes.com/thmb/QVMaPhXnj1HQ70C7Ka9WYtuipHg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/17205-eggs-benedict-DDMFS-4x3-a0042d5ae1da485fac3f468654187db0.jpg",
+    "description": "Poached eggs served on toasted English muffin with ham and hollandaise sauce.",
+    "type": "Breakfast"
+  },
+  {
+    "name": "Club Sandwich",
+    "price": 12000,
+    "imageURL": "https://hips.hearstapps.com/hmg-prod/images/delish-200511-seo-club-sandwich-h-14383-eb-1590780714.jpg?crop=0.671xw:1.00xh;0.123xw,0&resize=1200:*",
+    "description": "Classic triple-decker sandwich with turkey, bacon, lettuce, tomato, and mayonnaise.",
+    "type": "Lunch"
+  }
+]
