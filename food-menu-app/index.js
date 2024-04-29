@@ -5,8 +5,6 @@ const menuList = document.getElementById("menuList");
 
 // 버튼 그룹
 const buttonGroup = document.getElementById("buttons");
-// 필터 버튼 리스트 (button)
-const buttonList = buttonGroup.querySelectorAll("button");
 
 // 메뉴 불러오는 함수
 loadMenu();
@@ -43,12 +41,15 @@ function paintMenuList(menuData) {
 }
 
 // 메뉴 필터링
-function filteredMenuList() {
-  const filteredData = fetchData.filter((data) => data.type === this.innerText);
-  if (this.innerText === "All") paintMenuList(fetchData);
+function filteredMenuList(buttonText) {
+  const filteredData = fetchData.filter((data) => data.type === buttonText);
+  if (buttonText === "All") paintMenuList(fetchData);
   else paintMenuList(filteredData);
 }
-// 버튼 클릭 시
-buttonList.forEach((btn) => {
-  btn.addEventListener("click", filteredMenuList);
+
+// 버튼 그룹 이벤트 위임
+buttonGroup.addEventListener("click", (event) => {
+  if (event.target.tagName === "BUTTON") {
+    filteredMenuList(event.target.innerText);
+  }
 });
