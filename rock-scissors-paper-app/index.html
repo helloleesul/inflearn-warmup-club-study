@@ -10,27 +10,25 @@
     <div id="wrap">
       <section>
         <h1>🙎‍♀️ 가위 바위 보 👾</h1>
-        <p>남은 횟수: <span id="counter"></span></p>
+        <p id="counterGroup">남은 횟수: <span id="counter"></span></p>
       </section>
       <section id="member">
         <div id="player">
-          <p>플레이어</p>
-          <span class="currentPlay"></span>
+          <p>플레이어 <span class="currentPlay"></span></p>
           <span class="score">0</span>
         </div>
         <div id="computer">
-          <p>컴퓨터</p>
-          <span class="currentPlay"></span>
+          <p>컴퓨터 <span class="currentPlay"></span></p>
           <span class="score">0</span>
         </div>
       </section>
-      <section id="counterGroup">
-        <h3>선택하기</h3>
-      </section>
-      <section id="buttons">
-        <button id="scissors">✌️</button>
-        <button id="rock">✊</button>
-        <button id="paper">🖐️</button>
+      <section>
+        <h3 id="action">선택하기</h3>
+        <div id="buttons">
+          <button id="scissors">✌️</button>
+          <button id="rock">✊</button>
+          <button id="paper">🖐️</button>
+        </div>
       </section>
       <p id="result"></p>
     </div>
