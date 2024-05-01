@@ -44,14 +44,22 @@ function handleStepBtn() {
 
 // 퀴즈 풀기
 function processQuiz(event, data) {
+  const question = data[turn].question.replace(/\s/g, "");
+  // 정답
+  const answer = new Function(
+    "return " +
+      [...question].map((q) => (q === "×" ? "*" : q === "÷" ? "/" : q)).join("")
+  );
+
+  // 정답을 맞췄을 때 (className)
   document.querySelectorAll("label").forEach((opt) => {
     opt.className = "false";
-    if (opt.htmlFor === data[turn].answer) {
+    if (Number(opt.htmlFor) === answer()) {
       opt.className = "true";
     }
   });
-  // 정답을 맞췄을 때
-  if (event.target.id === data[turn].answer) {
+  // 정답을 맞췄을 때 (result)
+  if (Number(event.target.id) === answer()) {
     document.body.className = "true";
     result = true;
   } else {
@@ -88,7 +96,7 @@ function paintQuiz(data) {
   let options = "";
 
   document.body.className = "";
-  question.textContent = data[turn].question;
+  question.textContent = `${data[turn].question} ?`;
   data[turn].options.forEach((opt) => {
     options += `<div>
         <input type="radio" id="${opt}" name="quizOption" value="${opt}" />
