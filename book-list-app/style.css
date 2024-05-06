@@ -1,0 +1,76 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 400px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  cursor: pointer;
+}
+
+#listHeader,
+#listBody li {
+  border-bottom: 1px solid;
+  display: flex;
+}
+#listHeader span,
+#listBody li span {
+  padding: 10px 0;
+  flex: 1;
+}
+#listBody li .delete {
+  text-align: right;
+}
+
+#listHeader {
+  color: #aaa;
+}
+
+#alert {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+#alert p {
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+}
+#alert p.add {
+  background-color: deepskyblue;
+}
+#alert p.remove {
+  background-color: lightcoral;
+}
+
+input,
+#submitBtn {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: inherit;
+  border: 1px solid;
+}

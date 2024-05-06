@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="wrap">
+      <h1>책</h1>
+      <div id="alert"></div>
+      <form id="bookForm">
+        <label for="bookName">책 이름</label>
+        <input type="text" id="bookName" />
+        <label for="bookAuthor">책 저자</label>
+        <input type="text" id="bookAuthor" />
+        <button type="submit" id="submitBtn">제출</button>
+      </form>
+      <article>
+        <div id="listHeader">
+          <span>책 이름</span>
+          <span>책 저자</span>
+          <span></span>
+        </div>
+        <ul id="listBody"></ul>
+      </article>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
