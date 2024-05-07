@@ -24,7 +24,7 @@ searchForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   // 현재 검색 유저
   const username = e.target[0].value;
-  !username && alert("유저 이름을 입력해주세요.");
+  if (!username) return alert("유저 이름을 입력해주세요.");
   try {
     // 검색 input 초기화
     const usernameInput = document.querySelector("#usernameInput");
