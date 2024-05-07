@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="wrap">
+      <header>Github Finder</header>
+      <main>
+        <section id="search">
+          <h1>Search Github Users</h1>
+          <p>Enter a username to fetch a user profile and repos</p>
+          <form id="searchForm">
+            <input id="usernameInput" type="text" />
+          </form>
+        </section>
+        <section id="userInfo">
+          <div id="profile">
+            <div>
+              <img
+                id="profileImg"
+                width="300"
+                height="300"
+                src=""
+                alt="프로필 이미지"
+              />
+              <a id="profileLink" href="" target="_blank">View Profile</a>
+            </div>
+            <div id="infoList">
+              <ul>
+                <li>Public Repos: <span id="publicRepos"></span></li>
+                <li>Public Gists: <span id="publicGists"></span></li>
+                <li>Followers: <span id="followers"></span></li>
+                <li>Following: <span id="following"></span></li>
+              </ul>
+              <ul>
+                <li>Company: <span id="company"></span></li>
+                <li>
+                  Website/Blog: <a id="blogLink" href="" target="_blank"></a>
+                </li>
+                <li>Location: <span id="location"></span></li>
+                <li>Member Since: <span id="memberSince"></span></li>
+              </ul>
+            </div>
+          </div>
+          <div id="repos">
+            <h2>Lastest Repos</h2>
+            <ul id="reposList"></ul>
+          </div>
+        </section>
+      </main>
+      <footer>Github Finder ©</footer>
+    </div>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
