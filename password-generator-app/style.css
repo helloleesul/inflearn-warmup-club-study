@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+
+#wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+article {
+  width: 500px;
+  box-shadow: 0px 3px 14px -6px #555;
+  padding: 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+#passwordBox {
+  background-color: lavender;
+  display: flex;
+  padding: 10px;
+  border-radius: 5px;
+  align-items: center;
+}
+#passwordBox p {
+  flex: 1;
+}
+
+button {
+  padding: 5px 10px;
+}
+
+#passwordInput {
+  width: 100%;
+  font-size: inherit;
+  padding: 5px 10px;
+}
+
+#passwordForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#warning {
+  background-color: lavenderblush;
+  padding: 20px;
+  border-radius: 5px;
+}
+#warning ul {
+  list-style-position: inside;
+}
