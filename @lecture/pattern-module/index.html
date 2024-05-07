@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module">
+      alert(`${typeof button} module`);
+    </script>
+
+    <script>
+      alert(`${typeof button} no module`);
+    </script>
+
+    <button id="button">Button</button>
+
+    <!-- <script type="module">
+      a = 4; // 에러
+    </script> -->
+
+    <!-- <script src="./script.js" ></script> -->
+    <!-- <script src="./index.js" type="module"></script> -->
+  </body>
+</html>
