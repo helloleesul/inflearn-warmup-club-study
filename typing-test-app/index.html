@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>타이핑 스피드 측정</h1>
+      <section>
+        <div class="result-group">
+          <p>WPM</p>
+          <span id="wpm"></span>
+        </div>
+        <div class="result-group">
+          <p>CPM</p>
+          <span id="cpm"></span>
+        </div>
+        <div>
+          <p>ERRORS</p>
+          <span id="errors"></span>
+        </div>
+        <div>
+          <p>TIME</p>
+          <div>
+            <span id="time"></span>
+            <span>s</span>
+          </div>
+        </div>
+        <div>
+          <p>%ACCURACY</p>
+          <span id="accuracy"></span>
+        </div>
+      </section>
+      <p id="guide"></p>
+      <textarea
+        type="text"
+        id="typing"
+        placeholder="여기에 타이핑을 하세요."
+        rows="5"
+        cols="40"
+      ></textarea>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>

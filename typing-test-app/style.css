@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  align-items: center;
+}
+
+section {
+  display: flex;
+  gap: 20px;
+}
+section > div {
+  border: 1px solid;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+section > div > *:last-child {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+#guide {
+  border-bottom: 1px solid;
+  padding: 20px;
+}
+
+#typing {
+  padding: 10px;
+  border: 1px solid;
+  resize: none;
+  font-size: 18px;
+}
+
+.incorrect {
+  color: red;
+}
+.correct {
+  color: blue;
+}
+.hidden {
+  display: none;
+}
