@@ -1,0 +1,40 @@
+#export-btn {
+  background-color: rgb(32, 178, 127);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.cell-row {
+  display: flex;
+}
+.cell-row:last-child .cell {
+  border-bottom: 1px solid lightgray;
+}
+.cell-row .cell:last-child {
+  border-right: 1px solid lightgray;
+}
+
+.cell {
+  width: 80px;
+  border: 1px solid lightgray;
+  border-bottom: none;
+  border-right: none;
+  height: 40px;
+  box-sizing: border-box;
+}
+.cell:focus {
+  outline: none;
+  background-color: #edfaff;
+}
+
+.cell.header {
+  text-align: center;
+  background-color: #eee;
+}
+.cell.header.active {
+  background-color: lightblue;
+  color: #fff;
+}
