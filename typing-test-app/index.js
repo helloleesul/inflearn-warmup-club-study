@@ -1,22 +1,22 @@
 const wpmDisplay = document.querySelector("#wpm");
 const cpmDisplay = document.querySelector("#cpm");
 const errorsDisplay = document.querySelector("#errors");
-const time = document.querySelector("#time");
+const timeDisplay = document.querySelector("#time");
 const accuracyDisplay = document.querySelector("#accuracy");
 
-const app = document.querySelector("#app");
-const resultGroup = document.querySelectorAll(".result-group");
+const container = document.querySelector("#app");
+const perMinuteGroup = document.querySelectorAll(".result-group");
 
-const guide = document.querySelector("#guide");
-const typing = document.querySelector("#typing");
+const messageDisplay = document.querySelector("#guide");
+const typingInput = document.querySelector("#typing");
 
-const TIME_COUNT = 20;
-let seconds = TIME_COUNT;
+const INIT_TIME = 20;
+let currentSeconds = INIT_TIME;
 let interval;
 
-let focused = false;
+let isFocused = false;
 let currentTyping = "";
-let currentSentenceIndex = 0;
+let currentGameTextIndex = 0;
 
 let errorCount = 0;
 let wpmCount = 0;
@@ -24,37 +24,37 @@ let cpmCount = 0;
 
 const gameText =
   "The quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow. Pack my box with five dozen liquor jugs.";
-const sentences = gameText.split(/(?<=\. )/);
-let visibleSentence = sentences[currentSentenceIndex];
+const splitGameText = gameText.split(/(?<=\. )/);
+let visibleGameText = splitGameText[currentGameTextIndex];
 
 initGame();
 
 // 게임 초기화
 function initGame() {
   // focus 초기화
-  focused = false;
+  isFocused = false;
   // wpm, cpm 숨기기
-  resultGroup.forEach((i) => {
+  perMinuteGroup.forEach((i) => {
     i.style.display = "none";
   });
   // wpm, cpm, errors, time, accuracy 초기화
   wpmDisplay.textContent = 0;
   cpmDisplay.textContent = 0;
   errorsDisplay.textContent = 0;
-  time.textContent = TIME_COUNT;
+  timeDisplay.textContent = INIT_TIME;
   accuracyDisplay.textContent = 100;
-  seconds = TIME_COUNT;
-  currentSentenceIndex = 0;
+  currentSeconds = INIT_TIME;
+  currentGameTextIndex = 0;
   errorCount = 0;
   wpmCount = 0;
   cpmCount = 0;
-  visibleSentence = sentences[currentSentenceIndex];
+  visibleGameText = splitGameText[currentGameTextIndex];
   // 안내문구
-  guide.textContent = "아래를 클릭해서 게임을 시작하세요.";
+  messageDisplay.textContent = "아래를 클릭해서 게임을 시작하세요.";
   // typing 입력값 초기화
-  typing.value = "";
+  typingInput.value = "";
   // typing 활성화
-  typing.removeAttribute("disabled");
+  typingInput.removeAttribute("disabled");
   // 리셋 버튼 삭제
   const resetEl = document.querySelector("#reset");
   resetEl?.remove();
@@ -63,24 +63,24 @@ function initGame() {
 function handleTyping(e) {
   currentTyping = e.target.value;
 
-  if (currentTyping.length === visibleSentence.length) {
+  if (currentTyping.length === visibleGameText.length) {
     errorCount = errorsDisplay.textContent;
     wpmCount = wpmDisplay.textContent;
     cpmCount = cpmDisplay.textContent;
 
-    currentSentenceIndex++;
+    currentGameTextIndex++;
 
-    if (currentSentenceIndex >= sentences.length) {
+    if (currentGameTextIndex >= splitGameText.length) {
       return gameStop();
     }
 
-    visibleSentence = sentences[currentSentenceIndex];
-    typing.value = "";
+    visibleGameText = splitGameText[currentGameTextIndex];
+    typingInput.value = "";
     currentTyping = "";
   }
 
   // 입력에 따른 class
-  let typedTextHTML = visibleSentence
+  let typingGameText = visibleGameText
     .split("")
     .map((char, index) => {
       if (currentTyping[index] === undefined) {
@@ -96,20 +96,20 @@ function handleTyping(e) {
     })
     .join("");
 
-  guide.innerHTML = typedTextHTML;
+  messageDisplay.innerHTML = typingGameText;
 
   updateStats();
 }
 
 // typing에 focus했을 때 게임시작
-typing.addEventListener("focus", gameStart);
+typingInput.addEventListener("focus", gameStart);
 // typing 입력 이벤트
-typing.addEventListener("input", handleTyping);
+typingInput.addEventListener("input", handleTyping);
 
 // cpm 계산
 function calculateCPM(text) {
   const charactersTyped = text.trim().length;
-  const cpm = (charactersTyped / TIME_COUNT) * 60;
+  const cpm = (charactersTyped / INIT_TIME) * 60;
   return cpm;
 }
 // wpm 계산
@@ -118,7 +118,7 @@ function calculateWPM(text) {
     .trim()
     .split(/\s+/)
     .filter((word) => word !== "").length;
-  const wpm = (wordsTyped / TIME_COUNT) * 60;
+  const wpm = (wordsTyped / INIT_TIME) * 60;
   return wpm;
 }
 // 정확도 계산
@@ -132,24 +132,24 @@ function updateStats() {
   const errors = document.querySelectorAll(".incorrect").length;
   const accuracy = calculateAccuracy(gameText, errors + Number(errorCount));
 
-  wpmDisplay.innerText = (parseFloat(wpm) + parseFloat(wpmCount)).toFixed(2);
-  cpmDisplay.innerText = (parseFloat(cpm) + parseFloat(cpmCount)).toFixed(2);
+  wpmDisplay.innerText = (Number(wpm) + Number(wpmCount)).toFixed(2);
+  cpmDisplay.innerText = (Number(cpm) + Number(cpmCount)).toFixed(2);
   errorsDisplay.innerText = errors + Number(errorCount);
   accuracyDisplay.innerText = accuracy.toFixed(0);
 }
 
 // 게임 시작
 function gameStart() {
-  if (!focused) {
+  if (!isFocused) {
     // focus 시작
-    focused = true;
+    isFocused = true;
     // 메세지 출력
-    guide.innerHTML = visibleSentence;
+    messageDisplay.innerHTML = visibleGameText;
     // 타이머 시작
     interval = setInterval(timer, 1000);
   } else {
     // 이벤트 리스너 제거
-    typing.removeEventListener("focus", gameStart);
+    typingInput.removeEventListener("focus", gameStart);
   }
 }
 // 게임 종료
@@ -161,24 +161,24 @@ function gameStop() {
   resetEl.innerText = "다시 시작";
   resetEl.id = "reset";
   // 리셋 버튼 삽입
-  app.append(resetEl);
+  container.append(resetEl);
   // typing 비활성화
-  typing.setAttribute("disabled", true);
+  typingInput.setAttribute("disabled", true);
   // wpm, cpm 노출
-  resultGroup.forEach((i) => {
+  perMinuteGroup.forEach((i) => {
     i.style.display = "block";
   });
   // 안내문구
-  guide.textContent = "새 게임을 시작하려면 다시 시작을 클릭하세요.";
+  messageDisplay.textContent = "새 게임을 시작하려면 다시 시작을 클릭하세요.";
   // 리셋 버튼 클릭 시, 게임 초기화
   resetEl.addEventListener("click", initGame);
 }
 // 타이머
 function timer() {
-  if (seconds <= 0) {
+  if (currentSeconds <= 0) {
     gameStop();
   } else {
-    seconds--;
-    time.textContent = seconds;
+    currentSeconds--;
+    timeDisplay.textContent = currentSeconds;
   }
 }
