@@ -22,70 +22,81 @@ let errorCount = 0;
 let wpmCount = 0;
 let cpmCount = 0;
 
+// 게임 텍스트
 const gameText =
   "The quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow. Pack my box with five dozen liquor jugs.";
+// '.'을 기준으로 배열화
 const splitGameText = gameText.split(/(?<=\. )/);
+// 현재 보여줄 텍스트 지정
 let visibleGameText = splitGameText[currentGameTextIndex];
 
 initGame();
 
 // 게임 초기화
 function initGame() {
-  // focus 초기화
+  // isFocused
   isFocused = false;
   // wpm, cpm 숨기기
   perMinuteGroup.forEach((i) => {
     i.style.display = "none";
   });
-  // wpm, cpm, errors, time, accuracy 초기화
+  // wpm, cpm, errors, accuracy 초기화
   wpmDisplay.textContent = 0;
   cpmDisplay.textContent = 0;
   errorsDisplay.textContent = 0;
-  timeDisplay.textContent = INIT_TIME;
   accuracyDisplay.textContent = 100;
-  currentSeconds = INIT_TIME;
-  currentGameTextIndex = 0;
   errorCount = 0;
   wpmCount = 0;
   cpmCount = 0;
+  // 타임 초기화
+  timeDisplay.textContent = INIT_TIME;
+  currentSeconds = INIT_TIME;
+  // 게임 텍스트 index 초기화
+  currentGameTextIndex = 0;
   visibleGameText = splitGameText[currentGameTextIndex];
-  // 안내문구
+  // 시작 전, 안내 메세지
   messageDisplay.textContent = "아래를 클릭해서 게임을 시작하세요.";
-  // typing 입력값 초기화
+  // typingInput 초기화
   typingInput.value = "";
-  // typing 활성화
+  // typingInput 활성화
   typingInput.removeAttribute("disabled");
-  // 리셋 버튼 삭제
+  // 다시 시작 버튼 삭제
   const resetEl = document.querySelector("#reset");
   resetEl?.remove();
 }
+
 // 타이핑 핸들러
 function handleTyping(e) {
+  // 현재 타이핑 입력값
   currentTyping = e.target.value;
-
+  // 현재 타이핑 글자 수와 보이는 텍스트 글자수가 같을 때
   if (currentTyping.length === visibleGameText.length) {
+    // 요소 값을 전역 wpm, cpm, errors 값에 적용
     errorCount = errorsDisplay.textContent;
     wpmCount = wpmDisplay.textContent;
     cpmCount = cpmDisplay.textContent;
-
+    // 다음 게임 텍스트
     currentGameTextIndex++;
-
+    // 게임 텍스트가 마지막일 때 게임 종료
     if (currentGameTextIndex >= splitGameText.length) {
       return gameStop();
     }
-
+    // 보이는 텍스트를 다음 텍스트로 적용
     visibleGameText = splitGameText[currentGameTextIndex];
+    // typingInput, 현재 타이핑 입력값 초기화
     typingInput.value = "";
     currentTyping = "";
   }
 
-  // 입력에 따른 class
+  // 현재 타이핑에 따라 class 표시
   let typingGameText = visibleGameText
     .split("")
     .map((char, index) => {
+      // 아직 입력하지 않은 값
       if (currentTyping[index] === undefined) {
         return `<span>${char}</span>`;
       } else {
+        // 대소문자 구분
         const pattern = new RegExp("^" + currentTyping[index] + "$");
         if (pattern.test(char)) {
           return `<span class="correct">${char}</span>`;
@@ -96,12 +107,13 @@ function handleTyping(e) {
     })
     .join("");
 
+  // 화면에 표시
   messageDisplay.innerHTML = typingGameText;
-
+  // 상태 업데이트
   updateStats();
 }
 
-// typing에 focus했을 때 게임시작
+// typing focus했을 때 게임시작
 typingInput.addEventListener("focus", gameStart);
 // typing 입력 이벤트
 typingInput.addEventListener("input", handleTyping);
@@ -140,45 +152,49 @@ function updateStats() {
 
 // 게임 시작
 function gameStart() {
+  // isFocused false일 떄
   if (!isFocused) {
-    // focus 시작
+    // isFocused true 설정
     isFocused = true;
-    // 메세지 출력
+    // 게임 텍스트 출력
     messageDisplay.innerHTML = visibleGameText;
-    // 타이머 시작
+    // 타이머 카운트 시작
     interval = setInterval(timer, 1000);
   } else {
-    // 이벤트 리스너 제거
+    // isFocused true일 때 이벤트 리스너 제거
     typingInput.removeEventListener("focus", gameStart);
   }
 }
 // 게임 종료
 function gameStop() {
-  // 타이머 끝
+  // 타이머 카운트 종료
   clearInterval(interval);
-  // 리셋 버튼 생성
+  // 다시 시작 버튼 생성
   const resetEl = document.createElement("button");
   resetEl.innerText = "다시 시작";
   resetEl.id = "reset";
-  // 리셋 버튼 삽입
+  // 다시 시작 버튼 삽입
   container.append(resetEl);
-  // typing 비활성화
+  // typingInput 비활성화
   typingInput.setAttribute("disabled", true);
   // wpm, cpm 노출
   perMinuteGroup.forEach((i) => {
     i.style.display = "block";
   });
-  // 안내문구
+  // 종료 후, 안내 메세지
   messageDisplay.textContent = "새 게임을 시작하려면 다시 시작을 클릭하세요.";
-  // 리셋 버튼 클릭 시, 게임 초기화
+  // 다시 시작 버튼 클릭 시, 게임 초기화
   resetEl.addEventListener("click", initGame);
 }
-// 타이머
+// 타이머 카운트
 function timer() {
+  // 타임 끝나면 게임 종료
   if (currentSeconds <= 0) {
     gameStop();
   } else {
+    // 타임 카운트
     currentSeconds--;
+    // 타임 카운트 화면에 노출
     timeDisplay.textContent = currentSeconds;
   }
 }
