@@ -1,14 +1,14 @@
 /**
  * <Toast /> : 아이템 생성, 수정, 삭제 시 알림
- * 예산 계산기
+ * header : 예산 계산기
  * <Form /> : 아이템 생성, 수정
  * <ListGroup> : 리스트 그룹
  *      <List /> : 리스트
  * </ListGroup>
- * 전체 삭제 버튼
- * 총 지출
+ * button : 전체 삭제 버튼
+ * p : 총 지출
  *
- * state : 현재 작성 중인 input, 리스트 데이터 array, 수정모드 boolean, toast 노출 boolean, toast 메세지
+ * state : 현재 데이터, 리스트 데이터 array, 수정모드 boolean, 알림 array
  */
 
 import { useCallback, useEffect, useMemo, useState } from "react";
