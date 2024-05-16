@@ -5,25 +5,34 @@ import { useParams, Link } from "react-router-dom";
 import PokemonModal from "../components/PokemonModal";
 
 const DetailPage = () => {
+  // params 값
   const { pokemonId } = useParams();
+  // 포켓몬 정보
   const [pokemon, setPokemon] = useState({});
+  // 데미지 관계 정보
   const [damageRelations, setDamageRelations] = useState([]);
+  // 로딩 상태
   const [loading, setLoading] = useState(true);
+  // 모달 open 상태
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
+    // params없을 때 로딩
     if (!pokemonId) {
       setLoading(true);
     } else {
+      // 있으면 params값으로 api 호출
       fetchPokemon(pokemonId);
     }
   }, [pokemonId]);
 
   useEffect(() => {
+    // 포켓몬 정보 없을 때 로딩
     if (!pokemon) {
       setLoading(true);
     }
-    if (Object.keys(pokemon).length) {
+    // 포켓몬 정보 빈 객체가 아닐 때 데이미관계 api 호출
+    if (Object.keys(pokemon).length > 0) {
       fetchDamageRelations();
     }
   }, [pokemon]);
@@ -42,6 +51,7 @@ const DetailPage = () => {
         `${requestData.data.species.url}`
       );
 
+      // 하단 이미지들 데이터 찾아서 배열로 저장
       let images = [];
       for (const key in requestData.data.sprites) {
         if (typeof requestData.data.sprites[key] === "string") {
@@ -67,9 +77,11 @@ const DetailPage = () => {
     }
   };
 
+  // 데미지관계 api
   const fetchDamageRelations = async () => {
     const request = await axiosInstance.get(`${pokemon.types[0].type.url}`);
     let arr = [];
+    // damage_relations 데이터 찾아서 데미지관계 state에 저장
     for (const key in request.data.damage_relations) {
       if (key.includes("from")) {
         arr = [...arr, { name: key, type: request.data.damage_relations[key] }];
@@ -78,6 +90,7 @@ const DetailPage = () => {
     setDamageRelations(arr);
   };
 
+  // 대표 이미지 클릭시 모달 open
   const handleDamageRelations = () => {
     setModalOpen(true);
   };
@@ -119,22 +132,22 @@ const DetailPage = () => {
             정보
           </h4>
           <div className="flex justify-evenly w-2/4 ">
-            <p>
+            <div>
               <div>Weight</div>
               <span>{pokemon.weight}</span>
-            </p>
-            <p>
+            </div>
+            <div>
               <div>Height</div>
               <span>{pokemon.height}</span>
-            </p>
-            <p>
+            </div>
+            <div>
               <div>Ability</div>
               {pokemon.abilities.map((ability) => (
                 <div key={ability.slot} className="capitalize">
                   {ability.ability.name}
                 </div>
               ))}
-            </p>
+            </div>
           </div>
         </div>
         <div className="flex justify-center flex-col items-center">

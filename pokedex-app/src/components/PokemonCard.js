@@ -7,6 +7,7 @@ const PokemonCard = ({ name }) => {
   const [pokemon, setPokemon] = useState({});
   const [loading, setLoading] = useState(true);
 
+  // 포켓몬 api 호출
   useEffect(() => {
     fetchPokemon();
   }, []);

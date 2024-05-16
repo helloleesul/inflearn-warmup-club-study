@@ -7,13 +7,19 @@ const SearchBar = ({
   searchResults,
   onSubmit,
 }) => {
+  // 연관 검색 노출 상태
   const [searchShow, setSearchShow] = useState(false);
 
+  // 검색input 값 또는 검색 결과가 변경될 때 호출
   useEffect(() => {
+    // 연관 검색 노출 true
     setSearchShow(true);
+    // 검색input 값 비었을 때, 연관 검색 숨기기
     if (!searchInput) setSearchShow(false);
-    if (searchResults.map((result) => result.name).includes(searchInput))
-      setSearchShow(false);
+    // 검색input 값이 검색 이름(array)에 포함된 경우 true일 때 (정확히 같아야 함)
+    if (searchResults.map((result) => result.name).includes(searchInput)) {
+      setSearchShow(false); // 연관 검색 숨기기
+    }
   }, [searchInput, searchResults]);
 
   return (
